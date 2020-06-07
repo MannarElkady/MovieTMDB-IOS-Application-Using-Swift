@@ -43,7 +43,6 @@ class Movie: Object ,Codable {
     @objc dynamic var adult: Bool
     @objc dynamic var backdropPath: String?
     @objc dynamic var originalLanguage, originalTitle: String
-  //  dynamic let genreIDS: [Int]
     @objc dynamic var title: String
     @objc dynamic var voteAverage: Double
     @objc dynamic var overview, releaseDate: String
@@ -57,7 +56,6 @@ class Movie: Object ,Codable {
         case backdropPath = "backdrop_path"
         case originalLanguage = "original_language"
         case originalTitle = "original_title"
-       // case genreIDS = "genre_ids"
         case title
         case voteAverage = "vote_average"
         case overview

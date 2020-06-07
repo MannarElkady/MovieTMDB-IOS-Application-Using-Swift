@@ -14,7 +14,6 @@ class CardViewCell: UITableViewCell {
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var rateLabel: UILabel!
     @IBOutlet private weak var releaseLabel: UILabel!
-    private let xibName = "CardViewCell"
     
     var movie : Movie? {
         didSet{

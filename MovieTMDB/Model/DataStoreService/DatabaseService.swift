@@ -41,7 +41,5 @@ class DatabaseService {
         try! database.write {
             database.delete(movie)
         }
-
     }
-
 }
