@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Alamofire
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -15,6 +15,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        let net = NetworkReachabilityManager()
+             let bool = net?.startListening(onQueue: DispatchQueue.main, onUpdatePerforming: { status in
+
+             switch status {
+
+             case .reachable(.ethernetOrWiFi):
+                 print("The network is reachable over the WiFi connection")
+
+             case .reachable(.cellular):
+                 print("The network is reachable over the WWAN connection")
+
+             case .notReachable:
+                 print("The network is not reachable")
+
+             case .unknown :
+                 print("It is unknown whether the network is reachable")
+                 
+             }
+        })
         return true
     }
 

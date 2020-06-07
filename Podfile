@@ -17,4 +17,5 @@ target 'MovieTMDB' do
   end
 pod 'Alamofire', '~> 5.2'
 pod 'RealmSwift'
+pod 'Kingfisher', '~> 5.0'
 end

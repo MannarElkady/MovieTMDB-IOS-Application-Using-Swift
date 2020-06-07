@@ -7,9 +7,21 @@
 //
 
 import UIKit
+import Kingfisher
 
-class CardViewCellTableViewCell: UITableViewCell {
+class
+Cell {
 
+    var movie : Movie? {
+        didSet{
+         //   let processor = DownsamplingImageProcessor(size: imageView.bounds.size)>> RoundCornerImageProcessor(cornerRadius: 20)
+            let url = URL(string: Constants.BASE_IMAGE_URL + ((movie?.posterPath) ?? "" ))
+            posterView.kf.setImage(with: url)
+            titleLabel.text = movie?.title
+            rateLabel.text = String(format:"%f", movie?.voteAverage ?? 0) + " / 10"
+            releaseLabel.text = movie?.releaseDate
+        }
+    }
     @IBOutlet private weak var posterView: UIImageView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var rateLabel: UILabel!

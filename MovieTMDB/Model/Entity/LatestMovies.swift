@@ -26,25 +26,27 @@ struct LatestMoviesResponse: Codable {
     }
 }
 
+
 // MARK: - Dates
 struct Dates: Codable {
     let maximum, minimum: String
 }
 
-// MARK: - Result
-struct Movie: Codable {
-    let popularity: Double
-    let voteCount: Int
-    let video: Bool
-    let posterPath: String?
-    let id: Int
-    let adult: Bool
-    let backdropPath: String?
-    let originalLanguage, originalTitle: String
-    let genreIDS: [Int]
-    let title: String
-    let voteAverage: Double
-    let overview, releaseDate: String
+// MARK: - Movie
+////this class is used for both json response decoding and as database entity, Note: Object conforms Hashable protocol 
+class Movie: Object ,Codable {
+    @objc dynamic var popularity: Double
+    @objc dynamic var voteCount: Int
+    @objc dynamic var video: Bool
+    @objc dynamic var posterPath: String?
+    @objc dynamic var id: Int
+    @objc dynamic var adult: Bool
+    @objc dynamic var backdropPath: String?
+    @objc dynamic var originalLanguage, originalTitle: String
+  //  dynamic let genreIDS: [Int]
+    @objc dynamic var title: String
+    @objc dynamic var voteAverage: Double
+    @objc dynamic var overview, releaseDate: String
 
     enum CodingKeys: String, CodingKey {
         case popularity
@@ -55,11 +57,15 @@ struct Movie: Codable {
         case backdropPath = "backdrop_path"
         case originalLanguage = "original_language"
         case originalTitle = "original_title"
-        case genreIDS = "genre_ids"
+       // case genreIDS = "genre_ids"
         case title
         case voteAverage = "vote_average"
         case overview
         case releaseDate = "release_date"
+    }
+ 
+    override static func primaryKey() -> String? {
+        return "id"
     }
 }
 
