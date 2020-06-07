@@ -8,8 +8,7 @@
 
 import Foundation
 
-class HomePagePresenter: HomePagePresenterProtocol{
-    
+class HomePagePresenter: HomePagePresenterProtocol {
     var homeController: HomePageControllerProtocol?
     lazy var networkLayer = NetworkService(httpHandler: HttpHandler())
     private var lastPageMovies:[Movie]?
@@ -30,9 +29,7 @@ class HomePagePresenter: HomePagePresenterProtocol{
                     self?.homeController?.displayMessage(title: "No More Movies" , message: "You've loaded all the movies available")
                 }
             }
-            
             networkLayer.getLatestMovies(withPage: page, completionHandler: completionHandler, errorHandler: errorHandler)
-            
         }
             
         else{
@@ -57,7 +54,12 @@ class HomePagePresenter: HomePagePresenterProtocol{
         //assume to save last scrolled page only when go offline
         DatabaseService.sharedInstance.addMovieList(movies: lastPageMovies)
     }
+    
     func getSavedMovies() -> [Movie] {
         return DatabaseService.sharedInstance.getAllMovies()
+    }
+    
+    func deleteAllMovies() {
+        DatabaseService.sharedInstance.deleteAll()
     }
 }

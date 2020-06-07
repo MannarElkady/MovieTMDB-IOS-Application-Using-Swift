@@ -28,12 +28,8 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="X7Z-87-Wcz" id="zwC-iq-2wJ"/>
-                                    <outlet property="delegate" destination="X7Z-87-Wcz" id="7E9-hA-dlE"/>
-                                </connections>
                             </tableView>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="aqe-r7-Q7I" customClass="CustomSearchBar" customModule="MovieTMDB" customModuleProvider="target">
+                            <searchBar contentMode="redraw" barStyle="black" searchBarStyle="prominent" placeholder="search for movie..." translatesAutoresizingMaskIntoConstraints="NO" id="aqe-r7-Q7I" customClass="CustomSearchBar" customModule="MovieTMDB" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="88" width="414" height="56"/>
                                 <color key="backgroundColor" red="1" green="1" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="barTintColor" red="0.030929201980000001" green="0.14292428430000001" blue="0.25666243649999998" alpha="0.49970569349999999" colorSpace="custom" customColorSpace="displayP3"/>
@@ -67,6 +63,7 @@
                     <navigationItem key="navigationItem" id="IKO-IZ-frV"/>
                     <connections>
                         <outlet property="movieTableView" destination="M6e-4J-DAg" id="aQ7-Vd-Fjn"/>
+                        <outlet property="searchBar" destination="aqe-r7-Q7I" id="qH6-D2-Suc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sNh-yJ-8r9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -84,23 +81,23 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="emg-eJ-MGE">
                                 <rect key="frame" x="0.0" y="44" width="414" height="403"/>
                             </imageView>
-                            <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pKy-qd-FTZ">
+                            <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pKy-qd-FTZ">
                                 <rect key="frame" x="16" y="378" width="382" height="448"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c2c-1B-w9L">
-                                        <rect key="frame" x="8" y="0.0" width="366" height="36"/>
-                                        <fontDescription key="fontDescription" name="BodoniSvtyTwoSCITCTT-Book" family="Bodoni 72 Smallcaps" pointSize="30"/>
+                                        <rect key="frame" x="8" y="16" width="366" height="38.5"/>
+                                        <fontDescription key="fontDescription" name="BodoniSvtyTwoSCITCTT-Book" family="Bodoni 72 Smallcaps" pointSize="32"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Details" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="9" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="6HK-rI-Dip">
-                                        <rect key="frame" x="8" y="52" width="366" height="21"/>
-                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="18"/>
+                                        <rect key="frame" x="8" y="70.5" width="366" height="21"/>
+                                        <fontDescription key="fontDescription" name="GillSans-Bold" family="Gill Sans" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="31e-7f-dNu">
-                                        <rect key="frame" x="8" y="89" width="366" height="18"/>
+                                        <rect key="frame" x="8" y="107.5" width="366" height="18"/>
                                         <attributedString key="attributedText">
                                             <fragment content="Rate and Popularity">
                                                 <attributes>
@@ -118,7 +115,7 @@
                                     <constraint firstItem="c2c-1B-w9L" firstAttribute="leading" secondItem="pKy-qd-FTZ" secondAttribute="leading" constant="8" id="KqD-4A-2ZH"/>
                                     <constraint firstAttribute="trailing" secondItem="c2c-1B-w9L" secondAttribute="trailing" constant="8" id="Vod-Us-91o"/>
                                     <constraint firstItem="6HK-rI-Dip" firstAttribute="top" secondItem="c2c-1B-w9L" secondAttribute="bottom" constant="16" id="eU6-HL-K3T"/>
-                                    <constraint firstItem="c2c-1B-w9L" firstAttribute="top" secondItem="pKy-qd-FTZ" secondAttribute="top" id="g5s-LG-odp"/>
+                                    <constraint firstItem="c2c-1B-w9L" firstAttribute="top" secondItem="pKy-qd-FTZ" secondAttribute="top" constant="16" id="g5s-LG-odp"/>
                                     <constraint firstItem="6HK-rI-Dip" firstAttribute="top" secondItem="c2c-1B-w9L" secondAttribute="bottom" constant="16" id="qUo-tl-cN0"/>
                                     <constraint firstAttribute="trailing" secondItem="6HK-rI-Dip" secondAttribute="trailing" constant="8" id="sub-ab-kha"/>
                                     <constraint firstItem="31e-7f-dNu" firstAttribute="top" secondItem="6HK-rI-Dip" secondAttribute="bottom" constant="16" id="vwQ-BR-dXj"/>

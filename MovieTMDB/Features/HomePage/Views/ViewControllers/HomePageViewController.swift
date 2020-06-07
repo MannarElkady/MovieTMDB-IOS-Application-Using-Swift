@@ -14,8 +14,25 @@ extension HomePageViewController{
     }
 }
 
-class HomePageViewController: UIViewController,HomePageControllerProtocol,UITableViewDelegate,UITableViewDataSource {
+extension HomePageViewController: HomePageControllerProtocol {
+    func updateUIDataSource(currentPage:Int, pageMovies: [Movie]) {
+        self.currentPage = currentPage
+        self.moviesToDisplay = self.moviesToDisplay + pageMovies
+        createSnapShot(withData: moviesToDisplay)
+      //  self.movieTableView.reloadData()
+    }
     
+    
+    func updateTotalPages(totalPages: Int) {
+       self.totalOfPages = totalPages
+    }
+    func displayMessage(title: String, message:String) {
+        self.showSimpleAlert(title: title, message: message)
+    }
+}
+class HomePageViewController: UIViewController,UITableViewDelegate {
+    
+    /// For table view in this controller, Diffable data sources for table view is used, instead of ui table view datasource delegate
     private var dataSource: UITableViewDiffableDataSource<TableViewSections, Movie>! = nil
     var moviesToDisplay: [Movie] = []
     private var currentPage: Int = 1
@@ -26,41 +43,29 @@ class HomePageViewController: UIViewController,HomePageControllerProtocol,UITabl
     private let CELL_NAME = "CardViewCell"
     
     lazy var homePresenter: HomePagePresenterProtocol = HomePagePresenter()
+    @IBOutlet private weak var searchBar: CustomSearchBar!
     @IBOutlet private weak var movieTableView: UITableView!
     private let spinner = UIActivityIndicatorView(style: .large)
     
-    func updateUIDataSource(currentPage:Int, pageMovies: [Movie]) {
-        self.currentPage = currentPage
-        self.moviesToDisplay = self.moviesToDisplay + pageMovies
-      //  createSnapShot(withData: moviesToDisplay)
-        self.movieTableView.reloadData()
-    }
-    
-    
-    func updateTotalPages(totalPages: Int) {
-       self.totalOfPages = totalPages
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         initTableView()
-        // init presenter's controller
         setUp()
         setReloadSpinner()
         NetworkReachability.shared.startNetworkReachabilityObserver()
-        //configureTableViewDiffableDataSource()
     }
     
     private func setUp(){
         self.navigationItem.title = HEADER_TITLE
+        self.searchBar.delegate = self
         self.homePresenter.homeController = self
         homePresenter.getMovies(forPage: currentPage)
     }
     private func initTableView(){
         // set table view delegates and datasource
         movieTableView.delegate = self
-        movieTableView.dataSource = self
+        configureTableViewDiffableDataSource()
         let nib = UINib.init(nibName: CELL_NAME, bundle: nil)
         movieTableView.register(nib, forCellReuseIdentifier: reuseIdentifier)
     }
@@ -93,16 +98,10 @@ class HomePageViewController: UIViewController,HomePageControllerProtocol,UITabl
         return moviesToDisplay.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let movieCell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! CardViewCell
-        movieCell.movie = moviesToDisplay[indexPath.row]
-        return movieCell
-    }
-    
+   
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let movieDetailsViewController = self.storyboard?.instantiateViewController(withIdentifier: "movieDetailsViewController") as! MovieDetailsViewController
-        //guard let movie = dataSource.itemIdentifier(for: indexPath) else {return}
-        let movie = moviesToDisplay[indexPath.row]
+        guard let movie = dataSource.itemIdentifier(for: indexPath) else {return}
         movieDetailsViewController.movie = movie
         self.navigationController?.pushViewController(movieDetailsViewController, animated: true)
         
@@ -112,33 +111,41 @@ class HomePageViewController: UIViewController,HomePageControllerProtocol,UITabl
         dataSource = UITableViewDiffableDataSource<TableViewSections, Movie>(tableView: movieTableView) {
             (tableView: UITableView, indexPath: IndexPath, identifier: Movie) -> UITableViewCell? in
             let movieCell = tableView.dequeueReusableCell(withIdentifier: self.reuseIdentifier, for: indexPath) as! CardViewCell
-            movieCell.movie = self.moviesToDisplay[indexPath.row]
+            if let movie = self.dataSource.itemIdentifier(for: indexPath){
+                movieCell.movie = movie
+            }
             return movieCell
         }
-
-        
     }
     
     private func createSnapShot(withData movies: [Movie]){
         var snapshot = NSDiffableDataSourceSnapshot<TableViewSections, Movie>()
         snapshot.appendSections([.mainSection])
         snapshot.appendItems(movies)
-        print("\n\n\n*******")
-        print(snapshot)
-        if let dataSource = dataSource{
-            dataSource.apply(snapshot, animatingDifferences: true)
-        }
+        dataSource.apply(snapshot, animatingDifferences: true)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return HEADER_TITLE
+
+}
+
+extension HomePageViewController: UISearchBarDelegate{
+    
+    func performSearch(searchQuery: String?) {
+        var filteredMovies = moviesToDisplay
+        if let searchQuery = searchQuery, !searchQuery.isEmpty {
+            filteredMovies = moviesToDisplay.filter { $0.title.lowercased().hasPrefix(searchQuery.lowercased()) }
+            stopReloadSpinner()
+        }
+        if(filteredMovies == moviesToDisplay){
+            setReloadSpinner()
+        }
+        createSnapShot(withData: filteredMovies)
     }
     
-    func displayMessage(title: String, message:String) {
-        self.showSimpleAlert(title: title, message: message)
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        performSearch(searchQuery: searchText)
     }
-
 }

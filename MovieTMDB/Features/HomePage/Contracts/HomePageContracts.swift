@@ -13,11 +13,11 @@ protocol HomePagePresenterProtocol {
     func getMovies(forPage page:Int)
     func getSavedMovies() -> [Movie]
     func saveMovies(lastPageMovies: [Movie])
+    func deleteAllMovies()
 }
 
 protocol HomePageControllerProtocol {
     var homePresenter: HomePagePresenterProtocol {get}
-    
     func updateTotalPages(totalPages:Int)
     func updateUIDataSource(currentPage:Int,pageMovies:[Movie])
     func displayMessage(title:String,message:String)

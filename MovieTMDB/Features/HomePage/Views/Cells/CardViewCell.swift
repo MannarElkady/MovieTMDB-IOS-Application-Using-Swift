@@ -26,17 +26,6 @@ class CardViewCell: UITableViewCell {
         }
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
-//    func loadViewFromNib() -> UIView {
-//        let bundle = Bundle(for: type(of: self))
-//        let nib = UINib(nibName: xibName, bundle: bundle)
-//        let view = nib.instantiate(withOwner: self, options: nil)[0] as! UITableViewCell
-//        return view
-//    }
-    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
