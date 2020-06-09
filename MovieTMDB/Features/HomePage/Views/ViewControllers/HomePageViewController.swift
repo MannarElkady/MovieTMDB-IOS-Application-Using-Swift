@@ -37,7 +37,7 @@ class HomePageViewController: UIViewController,UITableViewDelegate {
     var moviesToDisplay: [Movie] = []
     private var currentPage: Int = 1
     private var totalOfPages: Int?
-    private let CELL_SIZE:CGFloat = 250
+    private let CELL_SIZE:CGFloat = 275
     private let HEADER_TITLE = "TMDB Movies"
     private let reuseIdentifier = "movieCell"
     private let CELL_NAME = "CardViewCell"
