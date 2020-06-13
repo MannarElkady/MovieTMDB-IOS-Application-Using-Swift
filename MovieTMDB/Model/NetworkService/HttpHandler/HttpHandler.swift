@@ -19,7 +19,6 @@ class HttpHandler:HttptHandlerProtocol{
     
     func getRequest(url : inout String ,completionHandler : @escaping(Data) -> Void , errorHandler : @escaping((Error)) -> Void,
                           parameters : [String:Any]?){
-      
         prepareGetUrl(url : &url,parameters: parameters )
         AF.request(url).validate()
             .responseJSON { (response) in

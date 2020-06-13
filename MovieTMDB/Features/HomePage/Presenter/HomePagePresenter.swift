@@ -10,7 +10,11 @@ import Foundation
 
 class HomePagePresenter: HomePagePresenterProtocol {
     var homeController: HomePageControllerProtocol?
-    lazy var networkLayer = NetworkService(httpHandler: HttpHandler())
+    let networkLayer: NetworkService
+    init() {
+        networkLayer = NetworkService(httpHandler: HttpHandler())
+    }
+    
     private var lastPageMovies:[Movie]?
     func getMovies(forPage page: Int) {
         if NetworkService.isNetworkAvailable {
@@ -61,5 +65,8 @@ class HomePagePresenter: HomePagePresenterProtocol {
     
     func deleteAllMovies() {
         DatabaseService.sharedInstance.deleteAll()
+    }
+    func navigateToDetails() {
+        
     }
 }

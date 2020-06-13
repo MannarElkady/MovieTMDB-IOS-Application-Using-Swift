@@ -13,6 +13,8 @@
 		296D4DF4248B845A00956C10 /* CardViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296D4DF2248B845A00956C10 /* CardViewCell.swift */; };
 		296D4DF5248B845A00956C10 /* CardViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 296D4DF3248B845A00956C10 /* CardViewCell.xib */; };
 		296D4DFA248C2C1500956C10 /* MovieDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296D4DF9248C2C1500956C10 /* MovieDetailsViewController.swift */; };
+		2970ED1424954806001E3EFC /* DetailsContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2970ED1324954806001E3EFC /* DetailsContracts.swift */; };
+		2970ED1824957050001E3EFC /* DetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2970ED1724957050001E3EFC /* DetailsPresenter.swift */; };
 		298E181C24897CD70050EB27 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298E181B24897CD70050EB27 /* AppDelegate.swift */; };
 		298E181E24897CD70050EB27 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298E181D24897CD70050EB27 /* SceneDelegate.swift */; };
 		298E182324897CD70050EB27 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 298E182124897CD70050EB27 /* Main.storyboard */; };
@@ -52,6 +54,8 @@
 		296D4DF2248B845A00956C10 /* CardViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewCell.swift; sourceTree = "<group>"; };
 		296D4DF3248B845A00956C10 /* CardViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardViewCell.xib; sourceTree = "<group>"; };
 		296D4DF9248C2C1500956C10 /* MovieDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewController.swift; sourceTree = "<group>"; };
+		2970ED1324954806001E3EFC /* DetailsContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsContracts.swift; sourceTree = "<group>"; };
+		2970ED1724957050001E3EFC /* DetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsPresenter.swift; sourceTree = "<group>"; };
 		298E181824897CD70050EB27 /* MovieTMDB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieTMDB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		298E181B24897CD70050EB27 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		298E181D24897CD70050EB27 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -180,6 +184,30 @@
 			path = Presenter;
 			sourceTree = "<group>";
 		};
+		2970ED12249547EF001E3EFC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				296D4DF9248C2C1500956C10 /* MovieDetailsViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2970ED152495701A001E3EFC /* Contracts */ = {
+			isa = PBXGroup;
+			children = (
+				2970ED1324954806001E3EFC /* DetailsContracts.swift */,
+			);
+			path = Contracts;
+			sourceTree = "<group>";
+		};
+		2970ED1624957035001E3EFC /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				2970ED1724957050001E3EFC /* DetailsPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
 		298E180F24897CD70050EB27 = {
 			isa = PBXGroup;
 			children = (
@@ -292,7 +320,9 @@
 		29A69752248A9C060013E082 /* Details */ = {
 			isa = PBXGroup;
 			children = (
-				296D4DF9248C2C1500956C10 /* MovieDetailsViewController.swift */,
+				2970ED1624957035001E3EFC /* Presenter */,
+				2970ED152495701A001E3EFC /* Contracts */,
+				2970ED12249547EF001E3EFC /* Views */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -513,6 +543,8 @@
 				29A69750248A94C70013E082 /* NetworkService.swift in Sources */,
 				29A6974E248A857B0013E082 /* JsonMapper.swift in Sources */,
 				29A69761248AE87A0013E082 /* UIUtils.swift in Sources */,
+				2970ED1424954806001E3EFC /* DetailsContracts.swift in Sources */,
+				2970ED1824957050001E3EFC /* DetailsPresenter.swift in Sources */,
 				296D4DEE248B6DBF00956C10 /* Reachability.swift in Sources */,
 				29A6975D248AC7250013E082 /* DatabaseService.swift in Sources */,
 				298E181C24897CD70050EB27 /* AppDelegate.swift in Sources */,

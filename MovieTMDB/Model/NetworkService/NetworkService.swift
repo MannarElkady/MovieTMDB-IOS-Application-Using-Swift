@@ -15,11 +15,11 @@ class NetworkService{
         self.httpHandler = httpHandler
     }
     
-    func getLatestMovies(withPage page: Int, completionHandler : @escaping(LatestMoviesResponse) -> Void , errorHandler : @escaping((Error)) -> Void) {
+    func getLatestMovies<T:Codable>(withPage page: Int, completionHandler : @escaping(T) -> Void , errorHandler : @escaping((Error)) -> Void) {
         
         let networkCompletionHandler = { (data:Data) -> Void
             in
-            let movieArray : LatestMoviesResponse = JsonMapper<LatestMoviesResponse>().parseObject(jsonData: data)!
+            let movieArray = JsonMapper<T>().parseObject(jsonData: data)!
             completionHandler(movieArray)
         }
         

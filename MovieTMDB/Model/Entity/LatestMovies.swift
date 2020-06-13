@@ -66,4 +66,3 @@ class Movie: Object ,Codable {
         return "id"
     }
 }
-

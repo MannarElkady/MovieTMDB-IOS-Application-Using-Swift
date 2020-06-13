@@ -19,7 +19,7 @@ extension HomePageViewController: HomePageControllerProtocol {
         self.currentPage = currentPage
         self.moviesToDisplay = self.moviesToDisplay + pageMovies
         createSnapShot(withData: moviesToDisplay)
-      //  self.movieTableView.reloadData()
+        
     }
     
     
@@ -104,7 +104,6 @@ class HomePageViewController: UIViewController,UITableViewDelegate {
         guard let movie = dataSource.itemIdentifier(for: indexPath) else {return}
         movieDetailsViewController.movie = movie
         self.navigationController?.pushViewController(movieDetailsViewController, animated: true)
-        
     }
     
     private func configureTableViewDiffableDataSource() {
